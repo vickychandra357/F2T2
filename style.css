@@ -1,0 +1,65 @@
+* {
+    background-color: black;
+}
+
+.input {
+    color: white;
+    font-family: sans-serif;
+    border: 2px solid white;
+    border-radius: 5px;
+    margin-left: 50px;
+    
+}
+
+.form-inline {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    margin: 30px;
+}
+.label{
+    margin-left: 50px;
+}
+h3{
+    margin-left: 80px
+}
+
+.label,
+h3 ,h4{
+    color: white;
+    font-family: sans-serif;
+}
+#error{
+    margin-top: 50px;
+    margin-left: 80px;
+}
+.btn {
+    background-color: white;
+    color: black;
+    border: 2px solid white;
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    left: 38px;
+    top: 150px;
+    margin-left: 50px;
+}
+.addEmployees{
+    margin-top: 70px ;
+    margin-left: 80px;
+}
+#message{
+    color: white;
+    margin-top: 10px;
+    margin-left: 80px;
+    font-family: Inter;
+    font-size: small;
+}
+#table{
+    display: block;
+    margin-top: 20px;
+}
+th,td{
+    border: 1px solid white;
+    padding: 5px;
+}

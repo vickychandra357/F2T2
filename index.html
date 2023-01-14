@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h3>New Employees</h3>
+    <form id="form" method="post" onclick="vaildation()">
+        <div class="form-inline">
+         <div>  
+        <Label class="label">Enter Name</Label><br>
+        <input class="input" type="text" id="name" size="50" name="fname">
+    </div>
+        <div>
+        <Label class="label">Enter Profession</Label><br>
+        <input class="input" type="text" id="profession" size="50" name="profession">
+    </div>
+        <div>
+        <Label class="label">Enter Age</Label><br>
+        <input class="input" type="number" id="age" size="50" name="age">
+    </div>
+</div>
+        <br>
+        <input class="btn" id="btn1" type="submit" value="Add User">
+    </form>
+    <div class="error">
+        <p id="error"></p>
+    </div>
+    <div class="addEmployees">
+        <h4>Added Employees</h4>
+    </div>
+    <div class="message">
+        <p id="message">You have 0 Employess</p>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
