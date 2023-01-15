@@ -1,68 +1,89 @@
-function vaildation(){
-var form = document.getElementById('form');
-form.addEventListener("submit", function (e) {
-    e.preventDefault()
-    var name = document.getElementById('name');
-    var profession = document.getElementById('profession');
-    var age = document.getElementById('age');
-    var error1 = "Error : Please Make sure All the fields are filled before adding in an employee!";
-    var success = "Success : Employee Added!"
-    if (name.value == "" && profession.value == "" && age.value == "") {
-        var errors = document.getElementById('error').innerHTML = error1;
-        let btn1 = document.querySelector('#btn1');
-        let content = document.querySelector('#error')
-        btn1.addEventListener("click", () => content.style.color = 'red');
-    }
-    else {
-        var Success = document.getElementById('error').innerHTML = success;
-        let btn1 = document.querySelector('#btn1');
-        let content = document.querySelector('#error')
-        btn1.addEventListener("click", () => content.style.color = 'green');
-    }
-})
+let arr = [];
+if (arr.length === 0) {
+  document.getElementById('table').classList.add('hidden');
 }
-let datas=[];
-const addData=(ev)=>{
-    ev.preventDefault();
-    let data={
-        id:Number.now(),
-        name:document.getElementById('name').value,
-        profession:document.getElementById('profession').value,
-        age:document.getElementById('age').value
+let nameEl = document.getElementById("name");
+let professionEl = document.getElementById("profession");
+let ageEl = document.getElementById("age");
+let errorMsgEl = document.getElementById("error");
+let successMsgEl = document.getElementById("success");
+let addBtnEl = document.getElementById("addUserBtn");
+let noOfEmployeeMsg = document.getElementById('two')  //line no 49 in Js
+let tableBodyContent = document.getElementById('tableBody'); //storing the table body element. We have to add row in this table element.
+
+addBtnEl.addEventListener("click", addUserFunction);
+
+// Add User function---------------------------  ------------------------------------------------------------------------------------------------
+function addUserFunction() {
+  let namee = nameEl.value;
+  let profession = professionEl.value;
+  let age = ageEl.value;
+  document.getElementById('table').classList.remove('hidden'); // remove hidden class from table element
+
+  if (namee && profession && age) {
+
+    // Employee is added 
+    successMsgEl.classList.remove("hidden");  // success msg displayed
+    errorMsgEl.classList.add("hidden");
+    noOfEmployeeMsg.classList.add('hidden');
+
+    // create one object from namee, profession, age & push that obj in global array
+    let objEl = {
+      Name: namee,
+      Profession: profession,
+      Age: age,
     }
-    datas.push(data);
-    document.forms[0].reset();
+    arr.push(objEl);
+
+    // Initialising this table element's innerHTML with empty string so that in map functionwe can append it with table tag code
+    tableBodyContent.innerHTML = '';
+
+    // Now using map function here we basically storing each array emenet in one table row with delete btn and au indexing  
+    arr.map((element, index) => {
+      tableBodyContent.innerHTML += `
+      <tr>
+      <td>id: ${index + 1}.</td>
+      <td>Name: ${element.Name}</td>
+      <td>Prefession: ${element.Profession}</td>
+      <td>Age: ${element.Age}</td>
+      <td><button class="deleteButton" onclick="deleteUserWithIndex(${index})">Delete</button></td>
+      </tr>`
+      console.log(tableBodyContent);
+    })
+  } else {
+    // one of or all fields are empty
+    successMsgEl.classList.add("hidden");
+    errorMsgEl.classList.remove("hidden");  // Error msg Displayed
+    noOfEmployeeMsg.classList.remove('hidden')
+  }
+
 }
-document.addEventListener('DDMContentLoaded',()=>{
-    document.getElementById('btn').addEventListener("click",addData)
-});
 
-let btnGet = document.querySelector('#btn1');
-let myTable=document.querySelector('table')
-
-let headers=['id','Name','Profession','Age']
-btnGet.addEventListener('click',()=>{
-    let table=document.createElement('table');
-    let headerRow=document.createElement('tr');
-
-    headers.forEach(headerText=>{
-        let header=document.createElement('th')
-        let textNode=document.createTextNode(headerText)
-        header.appendChild(textNode)
-        headerRow.appendChild(header)
-    })
-    table.appendChild(headerRow)
-    datas.forEach(emp =>{
-        let row=document.createElement('tr')
-
-        Object.values(emp).forEach(text =>{
-            let cell=document.createElement('td')
-            let textNode=document.createTextNode('text')
-            cell.appendChild(textNode)
-            row.appendChild(cell)
-        })
-        table.appendChild(row)
-    })
-    myTable.append(table)
-})
-// var msg=document.getElementById('message').innerHTML = myTable;
+// Delete User Function--------------------------------------------------------------------------------------------------------------
+let removedUserr;
+function deleteUserWithIndex(index) {
+  removedUserr = arr.splice(index, 1);
+  console.log(removedUserr);
+  // Now after removing the specified indexed element reprint the all user again
+  tableBodyContent.innerHTML = '';
+  console.log(arr)
+  arr.map((element, index) => {
+    tableBodyContent.innerHTML += `
+    <tr>
+    <td>id: ${index + 1}.</td>
+    <td>Name: ${element.Name}</td>
+    <td>Prefession: ${element.Profession}</td>
+    <td>Age: ${element.Age}</td>
+    <td><button class="deleteButton" onclick="deleteUserWithIndex(${index})">Delete</button></td>
+    </tr>`
+    console.log(tableBodyContent.innerHTML);
+  })
+  console.log(arr)
+  if (arr.length === 0) {
+    document.getElementById('table').classList.add('hidden');
+    successMsgEl.classList.add("hidden");
+    errorMsgEl.classList.remove("hidden");  // Error msg Displayed
+    noOfEmployeeMsg.classList.remove('hidden')
+  }
+}     
+        
